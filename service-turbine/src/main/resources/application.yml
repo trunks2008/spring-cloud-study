@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: service-turbine
+server:
+  port: 8764
+eureka:
+  client:
+    serviceUrl:
+     defaultZone: http://localhost:8761/eureka
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+turbine:
+  app-config: eureka-hi,eureka-hi2
+  aggregator:
+    clusterConfig: default
+  clusterNameExpression: new String("default")
+  combine-host: true
+  instanceUrlSuffix:
+    default: actuator/hystrix.stream

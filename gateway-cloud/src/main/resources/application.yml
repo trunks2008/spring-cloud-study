@@ -1,0 +1,30 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+      routes:
+      - id: eureka-hi
+        uri: lb://eureka-hi
+        predicates:
+          - Path=/demo/**
+        filters:
+          - StripPrefix=1
+      - id: eureka-hi2
+        uri: lb://eureka-hi2
+        predicates:
+          - Path=/demo2/**
+        filters:
+          - StripPrefix=1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
